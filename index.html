@@ -9,7 +9,7 @@
       --primary: #ff4d6d;
       --primary-hover: #ff758f;
       --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
-      --card-bg: rgba(255, 255, 255, 0.92);
+      --card-bg: rgba(255, 255, 255, 0.94);
       --text-color: #2b2d42;
       --text-light: #6c757d;
     }
@@ -226,7 +226,7 @@
       opacity: 1;
     }
 
-    /* Certificate Result Screen */
+    /* Certificate Result Screen & Photo Frame */
     .result-screen {
       text-align: center;
       display: none;
@@ -238,25 +238,70 @@
       100% { transform: scale(1); opacity: 1; }
     }
 
-    .cert-badge {
-      width: 80px;
-      height: 80px;
-      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+    .status-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, #28a745, #20c997);
       color: white;
-      border-radius: 50%;
+      font-weight: 800;
+      font-size: 1.05rem;
+      padding: 8px 20px;
+      border-radius: 30px;
+      margin-bottom: 16px;
+      box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+      letter-spacing: 1px;
+    }
+
+    .photo-frame-container {
+      position: relative;
+      width: 180px;
+      height: 180px;
+      margin: 0 auto 16px;
+      border-radius: 20px;
+      overflow: hidden;
+      border: 4px solid var(--primary);
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.3);
+      background: #fff;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 2.2rem;
-      margin: 0 auto 16px;
-      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .photo-frame-container:hover {
+      transform: scale(1.03);
+    }
+
+    .photo-frame-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .upload-placeholder {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 700;
+      padding: 10px;
+    }
+
+    .upload-placeholder span {
+      font-size: 2rem;
+    }
+
+    #photo-input {
+      display: none;
     }
 
     .result-title {
       color: #2b2d42;
-      font-size: 1.6rem;
+      font-size: 1.5rem;
       font-weight: 800;
-      margin-bottom: 8px;
+      margin-bottom: 6px;
     }
 
     .score-tag {
@@ -264,19 +309,19 @@
       background: #28a745;
       color: white;
       font-weight: 700;
-      font-size: 0.9rem;
-      padding: 4px 14px;
+      font-size: 0.85rem;
+      padding: 4px 12px;
       border-radius: 20px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .result-desc {
       color: var(--text-light);
       font-size: 0.95rem;
-      line-height: 1.6;
-      margin-bottom: 24px;
+      line-height: 1.5;
+      margin-bottom: 20px;
       background: #f8f9fa;
-      padding: 16px;
+      padding: 14px;
       border-radius: 16px;
       border: 1px dashed #dee2e6;
     }
@@ -286,9 +331,9 @@
       color: white;
       border: none;
       width: 100%;
-      padding: 16px;
+      padding: 15px;
       border-radius: 16px;
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
@@ -344,14 +389,25 @@
       </div>
     </div>
 
-    <!-- Result Screen -->
+    <!-- Result Screen with Photo Upload & Official Status -->
     <div class="result-screen" id="result-screen">
-      <div class="cert-badge">🏆</div>
-      <h2 class="result-title">LULUS 100% PERFECT!</h2>
-      <span class="score-tag">NILAI: A+ (RESMI PACARAN)</span>
+      <div class="status-badge">🎉 RESMI PACARAN 🎉</div>
+
+      <!-- Interactive Photo Upload Frame -->
+      <div class="photo-frame-container" onclick="document.getElementById('photo-input').click()">
+        <div class="upload-placeholder" id="upload-placeholder">
+          <span>📸</span>
+          Klik untuk Upload Foto Berdua Kita!
+        </div>
+        <img id="uploaded-photo" style="display: none;" alt="Foto Berdua">
+      </div>
+      <input type="file" id="photo-input" accept="image/*" onchange="previewPhoto(event)">
+
+      <h2 class="result-title">SELAMAT! KITA JADIAN! 💕</h2>
+      <span class="score-tag">NILAI: 100/100 (A+)</span>
       
       <div class="result-desc">
-        Sistem mengonfirmasi bahwa kamu telah <strong>resmi menjadi pacarku</strong>. Keputusan ini sah, berlaku mulai hari ini, dan tidak bisa dikembalikan! 🥰❤️
+        Sistem mencatat bahwa kamu telah <strong>resmi menjadi pacarku</strong>. Keputusan ini sah, berlaku mulai hari ini, dan tidak bisa dikembalikan! 🥰❤️
       </div>
 
       <a id="wa-link" href="#" target="_blank" class="whatsapp-btn">
@@ -363,7 +419,7 @@
   <!-- Dodging No Button -->
   <button id="btn-no" onmouseover="kabur()" onclick="kabur()">Nggak bisa ya cie 😜</button>
 
-  <!-- Toast Message -->
+  <!-- Toast Notification -->
   <div class="toast" id="toast">Tombolnya nggak bisa diklik yaa! 🤪</div>
 
   <script>
@@ -413,12 +469,12 @@
         ]
       },
       {
-        q: "yang paling cantik",
+        q: "Siapa yang paling cantik? ✨",
         options: [
-          "kamu 💖",
-          "rara",
-          "balik ke a ✨",
-          "balik ke b"
+          "Kamu 💖",
+          "Rara 🥰",
+          "Balik ke A ✨",
+          "Balik ke B 💕"
         ]
       },
       {
@@ -431,7 +487,7 @@
         ]
       },
       {
-        q: "Soal Final: will you be my gf ? 💍✨",
+        q: "Soal Final: Will you be my gf? 💍✨",
         isFinal: true,
         options: [
           "A. MAU BANGET! 🥰❤️",
@@ -529,14 +585,29 @@
       setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
+    // Photo Preview Function
+    function previewPhoto(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          const img = document.getElementById('uploaded-photo');
+          const placeholder = document.getElementById('upload-placeholder');
+          img.src = e.target.result;
+          img.style.display = 'block';
+          placeholder.style.display = 'none';
+        }
+        reader.readAsDataURL(file);
+      }
+    }
+
     function showResult() {
       playSuccessSound();
       document.getElementById('quiz-screen').style.display = 'none';
       document.getElementById('btn-no').style.display = 'none';
       document.getElementById('result-screen').style.display = 'block';
       
-      // Setup WhatsApp Link (Ganti pesan ini kalau mau disesuaikan)
-      const message = encodeURIComponent("Halo! Aku udah selesai ngisi Kuis Evaluasi Hubungan kamu dan jawabannya 100% MAU BANGET! Kita resmi pacaran ya sekarang! 🥰❤️");
+      const message = encodeURIComponent("Halo! Aku udah jawab kuisnya dan kita RESMI PACARAN sekarang! Aku juga udah upload foto kita berdua nih! 🥰❤️");
       document.getElementById('wa-link').href = `https://wa.me/?text=${message}`;
 
       startConfetti();
