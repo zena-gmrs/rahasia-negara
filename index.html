@@ -3,429 +3,593 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ujian Evaluasi Hubungan Romantis ✨💖</title>
-  
-  <!-- Google Fonts: Poppins & Quicksand -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Canvas Confetti CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          fontFamily: {
-            poppins: ['"Poppins"', 'sans-serif'],
-            quicksand: ['"Quicksand"', 'sans-serif'],
-          },
-          colors: {
-            love: {
-              50: '#fff0f3',
-              100: '#ffccd5',
-              200: '#ffb3c1',
-              300: '#ff8fa3',
-              400: '#ff758c',
-              500: '#ff4d6d',
-              600: '#c9184a',
-            }
-          },
-          animation: {
-            'bounce-slow': 'bounce 3s infinite',
-            'float': 'float 4s ease-in-out infinite',
-            'pop-in': 'popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards',
-          },
-          keyframes: {
-            float: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-8px)' },
-            },
-            popIn: {
-              '0%': { opacity: '0', transform: 'scale(0.85)' },
-              '100%': { opacity: '1', transform: 'scale(1)' },
-            }
-          }
-        }
-      }
-    }
-  </script>
-
+  <title>Ujian Evaluasi Hubungan Kita 💖</title>
   <style>
+    :root {
+      --primary: #ff4d6d;
+      --primary-hover: #ff758f;
+      --bg-gradient: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #feada6 100%);
+      --card-bg: rgba(255, 255, 255, 0.92);
+      --text-color: #2b2d42;
+      --text-light: #6c757d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    }
+
     body {
-      background: linear-gradient(135deg, #ffdee9 0%, #b5fffc 100%);
-      background-attachment: fixed;
-      font-family: 'Quicksand', sans-serif;
       min-height: 100vh;
+      background: var(--bg-gradient);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
       overflow-x: hidden;
+      position: relative;
     }
 
-    /* Glassmorphism card container */
-    .glass-card {
-      background: rgba(255, 255, 255, 0.92);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border: 2px solid rgba(255, 255, 255, 0.8);
-      box-shadow: 0 20px 40px -10px rgba(255, 77, 109, 0.25);
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
 
-    /* Quiz Option button effect */
-    .quiz-opt {
-      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-    .quiz-opt:hover {
-      transform: translateY(-2px) scale(1.01);
-      box-shadow: 0 8px 20px rgba(255, 77, 109, 0.2);
-    }
-    .quiz-opt:active {
-      transform: translateY(1px) scale(0.99);
+    /* Floating Hearts Background */
+    .bg-hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
     }
 
-    /* Certificate stamp badge */
-    .stamp {
-      transform: rotate(-12deg);
-      box-shadow: 0 0 0 3px #c9184a, 0 0 0 6px rgba(201, 24, 74, 0.3);
+    .heart-particle {
+      position: absolute;
+      color: rgba(255, 77, 109, 0.3);
+      font-size: 20px;
+      animation: floatUp 8s linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0.5); opacity: 0; }
+      20% { opacity: 0.8; }
+      100% { transform: translateY(-10vh) rotate(360deg) scale(1.2); opacity: 0; }
+    }
+
+    /* Main Container Card */
+    .container {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.4);
+      width: 100%;
+      max-width: 450px;
+      padding: 32px 28px;
+      z-index: 10;
+      position: relative;
+      transition: all 0.3s ease;
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* Header & Progress Bar */
+    .quiz-header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .quiz-badge {
+      display: inline-block;
+      background: #ffe5ec;
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.85rem;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 12px;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      box-shadow: 0 2px 10px rgba(255, 77, 109, 0.15);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: #e9ecef;
+      border-radius: 10px;
+      overflow: hidden;
+      margin-top: 14px;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 25%;
+      background: linear-gradient(90deg, #ff4d6d, #ff758f);
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    /* Question Content */
+    .question-title {
+      font-size: 1.35rem;
+      color: var(--text-color);
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 20px;
+      min-height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    /* Options Styling */
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option-btn {
+      background: white;
+      border: 2px solid #f0f0f0;
+      padding: 14px 18px;
+      border-radius: 16px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text-color);
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: flex;
+      align-items: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+      position: relative;
+    }
+
+    .option-btn:hover {
+      border-color: var(--primary-hover);
+      background: #fff5f7;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(255, 77, 109, 0.15);
+    }
+
+    .option-btn:active {
+      transform: scale(0.98);
+    }
+
+    .option-btn .prefix {
+      background: #f8f9fa;
+      color: var(--primary);
+      width: 28px;
+      height: 28px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-weight: 700;
+      font-size: 0.9rem;
+      border: 1px solid #e9ecef;
+    }
+
+    /* Jail/Dodging No Button */
+    #btn-no {
+      position: fixed;
+      background: #e9ecef;
+      color: #6c757d;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 12px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      z-index: 100;
+      display: none;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(43, 45, 66, 0.9);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      z-index: 1000;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Certificate Result Screen */
+    .result-screen {
+      text-align: center;
+      display: none;
+      animation: popIn 0.5s ease-out;
+    }
+
+    @keyframes popIn {
+      0% { transform: scale(0.8); opacity: 0; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    .cert-badge {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #ff4d6d, #ff758f);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 16px;
+      box-shadow: 0 10px 25px rgba(255, 77, 109, 0.4);
+    }
+
+    .result-title {
+      color: #2b2d42;
+      font-size: 1.6rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .score-tag {
+      display: inline-block;
+      background: #28a745;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 4px 14px;
+      border-radius: 20px;
+      margin-bottom: 16px;
+    }
+
+    .result-desc {
+      color: var(--text-light);
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      background: #f8f9fa;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px dashed #dee2e6;
+    }
+
+    .whatsapp-btn {
+      background: #25D366;
+      color: white;
+      border: none;
+      width: 100%;
+      padding: 16px;
+      border-radius: 16px;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 8px 20px rgba(37, 211, 102, 0.35);
+      transition: all 0.3s ease;
+      text-decoration: none;
+    }
+
+    .whatsapp-btn:hover {
+      background: #20ba5a;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(37, 211, 102, 0.45);
+    }
+
+    /* Canvas Confetti */
+    #confetti-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 999;
     }
   </style>
 </head>
+<body>
 
-<body class="flex flex-col items-center justify-center p-4 sm:p-6 min-h-screen">
+  <!-- Floating Background Elements -->
+  <div class="bg-hearts" id="bg-hearts"></div>
+  <canvas id="confetti-canvas"></canvas>
 
-  <!-- Background decorative floating elements -->
-  <div class="fixed top-10 left-8 text-4xl animate-float opacity-70 pointer-events-none select-none">💖</div>
-  <div class="fixed bottom-12 right-8 text-4xl animate-float opacity-70 pointer-events-none select-none" style="animation-delay: 1.5s;">🌸</div>
-  <div class="fixed top-1/3 right-12 text-3xl animate-float opacity-60 pointer-events-none select-none" style="animation-delay: 2.5s;">✨</div>
-
-  <!-- Main Card Container -->
-  <main class="w-full max-w-md glass-card rounded-3xl p-6 sm:p-8 relative overflow-hidden z-10 transition-all duration-500">
-    
-    <!-- Top Header & Progress Bar -->
-    <header class="mb-6">
-      <div class="flex justify-between items-center mb-2">
-        <span class="text-xs font-extrabold uppercase tracking-widest text-love-600 bg-love-50 px-3 py-1 rounded-full border border-love-100">
-          📋 Ujian Resmi Hubungan
-        </span>
-        <span id="progress-text" class="text-xs font-bold text-gray-500">Soal 1 dari 4</span>
-      </div>
-
-      <!-- Interactive Progress Bar -->
-      <div class="w-full bg-gray-100 rounded-full h-3 overflow-hidden p-0.5 border border-pink-100 shadow-inner">
-        <div id="progress-bar" class="bg-gradient-to-r from-love-400 to-love-600 h-full rounded-full transition-all duration-500 ease-out" style="width: 25%;"></div>
-      </div>
-    </header>
-
-    <!-- Dynamic Quiz Container -->
-    <div id="quiz-body" class="animate-pop-in">
-      <!-- Question title -->
-      <div class="flex items-start gap-3 mb-5">
-        <span id="question-emoji" class="text-3xl sm:text-4xl">🤔</span>
-        <div>
-          <h2 id="question-title" class="font-poppins font-bold text-gray-800 text-lg sm:text-xl leading-snug">
-            Loading...
-          </h2>
-          <p id="question-desc" class="text-xs text-gray-400 mt-1">Pilih salah satu jawaban yang paling jujur ya!</p>
+  <!-- Main Card -->
+  <div class="container">
+    <!-- Quiz Interface -->
+    <div id="quiz-screen">
+      <div class="quiz-header">
+        <span class="quiz-badge" id="step-badge">SOAL #1 DARI 4</span>
+        <div class="progress-bar-container">
+          <div class="progress-bar" id="progress-bar"></div>
         </div>
       </div>
 
-      <!-- Options List -->
-      <div id="options-container" class="space-y-3 mb-6 relative min-h-[220px]">
-        <!-- Dynamically filled via JavaScript -->
+      <div class="question-title" id="question-text">
+        Siapa orang yang paling sering bikin kamu senyum-senyum sendiri belakangan ini? 🤭
+      </div>
+
+      <div class="options-grid" id="options-container">
+        <!-- Options generated dynamically -->
       </div>
     </div>
 
-    <!-- Footer Note / Disclaimer -->
-    <footer class="text-center pt-3 border-t border-pink-100">
-      <p class="text-[11px] text-gray-400 font-medium">
-        🔒 *Sistem ujian terenkripsi cinta 100%. Tidak ada jawaban salah.*
-      </p>
-    </footer>
+    <!-- Result Screen -->
+    <div class="result-screen" id="result-screen">
+      <div class="cert-badge">🏆</div>
+      <h2 class="result-title">LULUS 100% PERFECT!</h2>
+      <span class="score-tag">NILAI: A+ (RESMI PACARAN)</span>
+      
+      <div class="result-desc">
+        Sistem mengonfirmasi bahwa kamu telah <strong>resmi menjadi pacarku</strong>. Keputusan ini sah, berlaku mulai hari ini, dan tidak bisa dikembalikan! 🥰❤️
+      </div>
 
-  </main>
-
-  <!-- Notification Toast for Dodger Button -->
-  <div id="toast-msg" class="fixed bottom-6 bg-gray-900/90 backdrop-blur text-white text-xs font-medium px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300 opacity-0 transform translate-y-4 pointer-events-none z-50 flex items-center gap-2">
-    <span>🤪</span> <span id="toast-text">Ups, tombol ini rusak!</span>
+      <a id="wa-link" href="#" target="_blank" class="whatsapp-btn">
+        <span>💬 Kirim Hasil ke WhatsApp Aku</span>
+      </a>
+    </div>
   </div>
 
+  <!-- Dodging No Button -->
+  <button id="btn-no" onmouseover="kabur()" onclick="kabur()">Nggak mau 😜</button>
+
+  <!-- Toast Message -->
+  <div class="toast" id="toast">Tombolnya nggak bisa diklik yaa! 🤪</div>
+
   <script>
-    /* ==========================================================
-       QUIZ DATA & STATE
-       ========================================================== */
-    const quizData = [
+    // Audio Synth (Web Audio API)
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    function playPopSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(600, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(800, audioCtx.currentTime + 0.1);
+      gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    }
+
+    function playSuccessSound() {
+      if (audioCtx.state === 'suspended') audioCtx.resume();
+      const notes = [400, 523.25, 659.25, 783.99, 1046.50];
+      notes.forEach((freq, idx) => {
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.frequency.value = freq;
+        gain.gain.setValueAtTime(0.15, audioCtx.currentTime + idx * 0.08);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + idx * 0.08 + 0.3);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start(audioCtx.currentTime + idx * 0.08);
+        osc.stop(audioCtx.currentTime + idx * 0.08 + 0.3);
+      });
+    }
+
+    // Questions Data
+    const questions = [
       {
-        emoji: "🧐",
-        question: "Soal #1: Siapa sih orang paling gemes & bikin kangen yang sering nge-chat kamu tiap hari?",
+        q: "Siapa orang yang paling sering bikin kamu senyum-senyum sendiri belakangan ini? 🤭",
         options: [
-          { letter: "A", text: "Orang yang ngirim kuis ini 🤭", valid: true },
-          { letter: "B", text: "Si pengirim kuis yang lucu ini 💖", valid: true },
-          { letter: "C", text: "Pilihan A & B benar banget!", valid: true },
-          { letter: "D", text: "Pokoknya kamu lah, masa orang lain! ✨", valid: true }
+          "Kamu lah, siapa lagi! ❤️",
+          "Yang lagi ngasih kuis ini 😜",
+          "Jawaban A dan B benar!",
+          "Pasti kamu dong 🥰"
         ]
       },
       {
-        emoji: "💭",
-        question: "Soal #2: Menurut kamu, kegiatan paling seru dan gak pernah bikin bosen itu apa?",
+        q: "yang paling cantik",
         options: [
-          { letter: "A", text: "Chattingan & telponan bareng kamu", valid: true },
-          { letter: "B", text: "Jalan-jalan & jajan bareng kamu", valid: true },
-          { letter: "C", text: "Mikirin kamu pas lagi gabut", valid: true },
-          { letter: "D", text: "Semua pilihan di atas Wajib 100%! 💯", valid: true }
+          "kamu 💖",
+          "rara",
+          "balik ke a ✨",
+          "balik ke b"
         ]
       },
       {
-        emoji: "🍕",
-        question: "Soal #3: Kalau kita lagi nongkrong bareng, siapa yang bakal paling sering senyum sendiri?",
+        q: "Seberapa kangen kamu sama aku setiap harinya? 🥺",
         options: [
-          { letter: "A", text: "Kamu, soalnya aku lucu banget 😜", valid: true },
-          { letter: "B", text: "Aku, karena seneng dideket kamu 🥰", valid: true },
-          { letter: "C", text: "Dua-duanya senyum barengan! 🌸", valid: true },
-          { letter: "D", text: "Pasti kita berdua bahagia banget ✨", valid: true }
+          "100% Kangen banget!",
+          "1000% Nggak bisa berhenti mikirin!",
+          "24 Jam non-stop! ⏳",
+          "Semuanya benar tanpa terkecuali! 💕"
         ]
       },
       {
-        emoji: "💌",
+        q: "Soal Final: Apakah kamu bersedia untuk menjadi pacar aku? 💍✨",
         isFinal: true,
-        question: "Soal Final: Apakah kamu bersedia secara sadar & bahagia untuk jadi PACARKU?",
         options: [
-          { letter: "A", text: "Mau banget dong! ❤️", valid: true },
-          { letter: "B", text: "Mau aja deh 🥰", valid: true },
-          { letter: "C", text: "Jelas Pilihan A 100%! ✨", valid: true },
-          { letter: "D", text: "Mengesahkan Pilihan B! 🎉", valid: true }
+          "A. MAU BANGET! 🥰❤️",
+          "B. Mau dong pastinya!",
+          "C. Pilihan A versi lebih yakin!",
+          "D. Pilihan B versi makin sayang!"
         ]
       }
     ];
 
     let currentStep = 0;
+    const toastMessages = [
+      "Eits, tombol ini gak bisa diklik! 😜",
+      "Eeeh mau kabur kemana? ✨",
+      "Harus pilih jawaban di atas dong! 💖",
+      "Ops, meleset! Mau bilang 'Iya' kan? 🥰",
+      "Percuma, tombol ini punya ilmu teleportasi! 🚀"
+    ];
+    let toastIndex = 0;
 
-    /* ==========================================================
-       UI RENDER LOGIC
-       ========================================================== */
-    function renderStep() {
-      const currentQuiz = quizData[currentStep];
-      const totalSteps = quizData.length;
+    // Background floating hearts
+    const heartsContainer = document.getElementById('bg-hearts');
+    const heartSymbols = ['❤️', '💖', '✨', '🌸', '💕'];
+    for (let i = 0; i < 20; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart-particle';
+      heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+      heart.style.left = `${Math.random() * 100}%`;
+      heart.style.animationDelay = `${Math.random() * 8}s`;
+      heart.style.animationDuration = `${6 + Math.random() * 6}s`;
+      heartsContainer.appendChild(heart);
+    }
 
-      // Update Header Progress
-      document.getElementById('progress-text').innerText = `Soal ${currentStep + 1} dari ${totalSteps}`;
-      const progressPercent = ((currentStep + 1) / totalSteps) * 100;
-      document.getElementById('progress-bar').style.width = `${progressPercent}%`;
+    function renderQuestion() {
+      const current = questions[currentStep];
+      document.getElementById('step-badge').textContent = `SOAL #${currentStep + 1} DARI ${questions.length}`;
+      document.getElementById('progress-bar').style.width = `${((currentStep + 1) / questions.length) * 100}%`;
+      document.getElementById('question-text').textContent = current.q;
 
-      // Update Question Content
-      document.getElementById('question-emoji').innerText = currentQuiz.emoji;
-      document.getElementById('question-title').innerText = currentQuiz.question;
-      
-      const descEl = document.getElementById('question-desc');
-      if (currentQuiz.isFinal) {
-        descEl.innerText = "⚠️ Peringatan: Pilihan jawaban di bawah ini akan mengubah status kamu!";
-        descEl.className = "text-xs font-bold text-love-600 mt-1";
-      } else {
-        descEl.innerText = "Pilih salah satu jawaban yang paling jujur ya!";
-        descEl.className = "text-xs text-gray-400 mt-1";
-      }
-
-      // Render Options
       const container = document.getElementById('options-container');
       container.innerHTML = '';
 
-      currentQuiz.options.forEach(opt => {
+      const prefixes = ['A', 'B', 'C', 'D'];
+      current.options.forEach((opt, idx) => {
         const btn = document.createElement('button');
-        btn.className = `quiz-opt w-full text-left p-3.5 sm:p-4 rounded-2xl border-2 border-pink-100 bg-white hover:border-love-300 hover:bg-love-50/50 text-gray-700 font-semibold text-sm sm:text-base flex items-center gap-3 shadow-sm`;
-        btn.onclick = () => handleAnswerSelect();
-
-        btn.innerHTML = `
-          <span class="w-8 h-8 rounded-xl bg-love-100 text-love-600 font-poppins font-bold flex items-center justify-center text-sm shrink-0">
-            ${opt.letter}
-          </span>
-          <span class="flex-grow">${opt.text}</span>
-        `;
+        btn.className = 'option-btn';
+        btn.innerHTML = `<span class="prefix">${prefixes[idx]}</span> <span>${opt}</span>`;
+        btn.onclick = () => selectOption();
         container.appendChild(btn);
       });
 
-      // Add sneaky "Nggak Mau" dodge button ONLY on final question
-      if (currentQuiz.isFinal) {
-        const dodgeBtn = document.createElement('button');
-        dodgeBtn.id = 'btn-dodge';
-        dodgeBtn.className = 'absolute text-[11px] font-bold text-gray-400 bg-gray-100 hover:bg-gray-200 border border-gray-200 px-3 py-1.5 rounded-full shadow-sm transition-all duration-200';
-        dodgeBtn.style.bottom = '-10px';
-        dodgeBtn.style.right = '0px';
-        dodgeBtn.innerText = 'Nggak mau 😜';
-
-        // Attach dodge triggers
-        dodgeBtn.onmouseover = dodgeAction;
-        dodgeBtn.onclick = dodgeAction;
-        dodgeBtn.ontouchstart = (e) => { e.preventDefault(); dodgeAction(); };
-
-        container.appendChild(dodgeBtn);
+      // Show dodging No button only on final question
+      const noBtn = document.getElementById('btn-no');
+      if (current.isFinal) {
+        noBtn.style.display = 'block';
+        resetNoBtnPosition();
+      } else {
+        noBtn.style.display = 'none';
       }
     }
 
-    /* ==========================================================
-       NEXT STEP & DODGER BUTTON HANDLERS
-       ========================================================== */
-    function handleAnswerSelect() {
-      // Smooth animation transition out
-      const bodyEl = document.getElementById('quiz-body');
-      bodyEl.classList.remove('animate-pop-in');
-      bodyEl.style.opacity = '0';
-      bodyEl.style.transform = 'scale(0.95)';
-
-      setTimeout(() => {
-        if (currentStep < quizData.length - 1) {
-          currentStep++;
-          renderStep();
-          bodyEl.style.opacity = '1';
-          bodyEl.style.transform = 'scale(1)';
-          bodyEl.classList.add('animate-pop-in');
-        } else {
-          showResultCertificate();
-        }
-      }, 250);
+    function selectOption() {
+      playPopSound();
+      if (currentStep < questions.length - 1) {
+        currentStep++;
+        renderQuestion();
+      } else {
+        showResult();
+      }
     }
 
-    let dodgeCount = 0;
-    const dodgeTexts = [
-      "Ups, tombol ini rusak! Pilih A/B/C/D aja ya 🤪",
-      "Eits meleset! Nggak bisa diklik wkkww 🏃‍♂️",
-      "Sistem menolak tombol ini! Harus terima! ❤️",
-      "Ehh mau kabur kemana? Klik pilihan atas aja! 🥰",
-      "Tombol penolakan sudah kadaluarsa! ❌"
-    ];
+    function resetNoBtnPosition() {
+      const noBtn = document.getElementById('btn-no');
+      noBtn.style.top = '85%';
+      noBtn.style.left = '50%';
+      noBtn.style.transform = 'translateX(-50%)';
+    }
 
-    function dodgeAction() {
-      const btn = document.getElementById('btn-dodge');
-      if (!btn) return;
-
-      dodgeCount++;
+    function kabur() {
+      playPopSound();
+      const noBtn = document.getElementById('btn-no');
+      const padding = 60;
+      const x = Math.random() * (window.innerWidth - noBtn.offsetWidth - padding * 2) + padding;
+      const y = Math.random() * (window.innerHeight - noBtn.offsetHeight - padding * 2) + padding;
       
-      // Random coordinates inside options container boundaries
-      const randomX = (Math.random() * 240) - 120;
-      const randomY = (Math.random() * 140) - 70;
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.transform = 'none';
 
-      btn.style.transform = `translate(${randomX}px, ${randomY}px) rotate(${Math.random() * 20 - 10}deg)`;
-
-      // Show humorous Toast Message
-      const toastText = dodgeTexts[(dodgeCount - 1) % dodgeTexts.length];
-      showToast(toastText);
+      // Show Toast
+      const toast = document.getElementById('toast');
+      toast.textContent = toastMessages[toastIndex % toastMessages.length];
+      toastIndex++;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 2000);
     }
 
-    function showToast(text) {
-      const toast = document.getElementById('toast-msg');
-      document.getElementById('toast-text').innerText = text;
+    function showResult() {
+      playSuccessSound();
+      document.getElementById('quiz-screen').style.display = 'none';
+      document.getElementById('btn-no').style.display = 'none';
+      document.getElementById('result-screen').style.display = 'block';
       
-      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
-      toast.classList.add('opacity-100', 'translate-y-0');
+      // Setup WhatsApp Link (Ganti pesan ini kalau mau disesuaikan)
+      const message = encodeURIComponent("Halo! Aku udah selesai ngisi Kuis Evaluasi Hubungan kamu dan jawabannya 100% MAU BANGET! Kita resmi pacaran ya sekarang! 🥰❤️");
+      document.getElementById('wa-link').href = `https://wa.me/?text=${message}`;
 
-      clearTimeout(window.toastTimer);
-      window.toastTimer = setTimeout(() => {
-        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
-        toast.classList.remove('opacity-100', 'translate-y-0');
-      }, 2200);
+      startConfetti();
     }
 
-    /* ==========================================================
-       FINAL RESULT & CERTIFICATE GENERATOR
-       ========================================================= */
-    function showResultCertificate() {
-      // Trigger Confetti Explosion
-      triggerConfetti();
+    // Confetti Animation
+    function startConfetti() {
+      const canvas = document.getElementById('confetti-canvas');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
 
-      const mainCard = document.querySelector('main');
-      mainCard.innerHTML = `
-        <div class="text-center animate-pop-in">
-          <!-- Top Badge -->
-          <div class="inline-block bg-emerald-100 text-emerald-700 font-extrabold text-xs px-4 py-1 rounded-full mb-3 border border-emerald-200">
-            🎉 UJIAN SELESAI & LULUS 100%
-          </div>
+      const particles = [];
+      const colors = ['#ff4d6d', '#ff758f', '#ffb3c1', '#28a745', '#ffc107', '#17a2b8'];
 
-          <!-- Title -->
-          <h1 class="font-poppins font-extrabold text-2xl sm:text-3xl text-gray-800 mb-1">
-            Sertifikat Hubungan Resmi 📜
-          </h1>
-          <p class="text-xs text-gray-400 mb-5">Diterbitkan oleh Sistem Cinta Terpercaya</p>
-
-          <!-- Result Certificate Card -->
-          <div class="bg-gradient-to-b from-love-50/80 to-white p-5 rounded-2xl border-2 border-love-200 text-left mb-6 shadow-inner relative overflow-hidden">
-            
-            <!-- Stamp Badge -->
-            <div class="absolute top-3 right-3 stamp bg-love-600 text-white font-poppins font-black text-[10px] px-2.5 py-1 rounded border-2 border-white tracking-widest uppercase">
-              LULUS PACARAN
-            </div>
-
-            <!-- Score -->
-            <div class="mb-4">
-              <span class="text-xs font-bold text-gray-400 uppercase tracking-wider block">NILAI AKHIR:</span>
-              <span class="font-poppins font-black text-4xl text-love-600">100/100 <span class="text-2xl text-love-500">(A+)</span></span>
-            </div>
-
-            <!-- Status & Message -->
-            <div class="space-y-2 text-xs sm:text-sm text-gray-700 leading-relaxed font-medium">
-              <p>
-                <strong class="text-gray-900">Selamat!</strong> Pilihan kamu tepat 100%! Sistem secara otomatis mencatat bahwa kita <strong class="text-love-600">RESMI BERPACARAN</strong> mulai detik ini. ✨
-              </p>
-              <p class="bg-white/80 p-3 rounded-xl border border-pink-100 text-pink-700 font-semibold text-xs italic">
-                "Garansi seumur hidup, penuh kasih sayang, selalu ada waktu buat kamu & NO REFUND ya! 💖"
-              </p>
-            </div>
-          </div>
-
-          <!-- WhatsApp Share Button -->
-          <button onclick="sendWhatsApp()" class="w-full font-poppins font-bold bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white text-base py-3.5 px-6 rounded-2xl shadow-xl transform hover:scale-[1.02] active:scale-[0.98] transition-all flex items-center justify-center gap-2 mb-3">
-            <span>💬 Kirim Bukti ke WhatsApp</span>
-          </button>
-
-          <!-- Restart button -->
-          <button onclick="location.reload()" class="text-xs font-bold text-gray-400 hover:text-love-500 transition-colors">
-            ↺ Ulangi Kuis Dari Awal
-          </button>
-        </div>
-      `;
-    }
-
-    /* ==========================================================
-       CONFETTI SHOWER & WHATSAPP INTEGRATION
-       ========================================================== */
-    function triggerConfetti() {
-      const duration = 3 * 1000;
-      const animationEnd = Date.now() + duration;
-
-      (function frame() {
-        confetti({
-          particleCount: 7,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 },
-          colors: ['#ff4d6d', '#ff758c', '#ffccd5', '#ffffff', '#34d399']
+      for (let i = 0; i < 120; i++) {
+        particles.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height - canvas.height,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          size: Math.random() * 8 + 4,
+          speedY: Math.random() * 3 + 2,
+          speedX: Math.random() * 2 - 1,
+          spin: Math.random() * 360
         });
-        confetti({
-          particleCount: 7,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 },
-          colors: ['#ff4d6d', '#ff758c', '#ffccd5', '#ffffff', '#34d399']
+      }
+
+      function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        particles.forEach(p => {
+          p.y += p.speedY;
+          p.x += p.speedX;
+          p.spin += 5;
+          
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate((p.spin * Math.PI) / 180);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+          ctx.restore();
+
+          if (p.y > canvas.height) {
+            p.y = -10;
+            p.x = Math.random() * canvas.width;
+          }
         });
-
-        if (Date.now() < animationEnd) {
-          requestAnimationFrame(frame);
-        }
-      })();
+        requestAnimationFrame(animate);
+      }
+      animate();
     }
 
-    function sendWhatsApp() {
-      const message = encodeURIComponent(
-        "Halo! 💖 Aku udah selesai ngerjain Ujian Evaluasi Hubungan nih.\n\n" +
-        "📊 Hasil Nilai: 100/100 (A+)\n" +
-        "📜 Status: LULUS RESMI JADI PACAR KAMU! 🎉\n\n" +
-        "Mulai hari ini no refund ya, pokoknya traktir aku jajan! 🥰✨"
-      );
-      
-      // Open WhatsApp directly
-      window.open(`https://api.whatsapp.com/send?text=${message}`, '_blank');
-    }
-
-    // Initialize first question on load
-    renderStep();
+    // Initialize Quiz
+    renderQuestion();
   </script>
 </body>
 </html>
